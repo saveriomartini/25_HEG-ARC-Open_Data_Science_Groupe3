@@ -13,7 +13,8 @@ This project includes:
 
 ## Prerequisites
 
-- Neo4j 4.x or 5.x installed and running
+- Neo4j 5.x installed and running (scripts use the newer `:auto` syntax)
+  - For Neo4j 4.x, modify import scripts to use `USING PERIODIC COMMIT` instead
 - Python 3.8 or higher
 - Synthea-generated CSV files (patients.csv, allergies.csv, conditions.csv, devices.csv)
 - At least 4GB of RAM allocated to Neo4j

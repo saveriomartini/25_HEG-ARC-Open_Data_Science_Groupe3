@@ -30,7 +30,7 @@ run_cypher() {
     local description=$2
     
     echo "→ $description"
-    if cat "$script" | cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" --format plain > /dev/null 2>&1; then
+    if cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" --format plain < "$script" > /dev/null 2>&1; then
         echo "  ✓ Success"
     else
         echo "  ✗ Failed"
@@ -58,7 +58,7 @@ run_cypher "cypher/create_underwent_relationships.cypher" "Creating UNDERWENT re
 echo "Step 3: Labeling SNOMED CT concepts..."
 echo "--------------------------------------"
 echo "→ Labeling ObjectConcept nodes by FSN suffix"
-if cat "cypher/label_concepts_by_fsn.cypher" | cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" --format plain > /dev/null 2>&1; then
+if cypher-shell -u "$NEO4J_USER" -p "$NEO4J_PASSWORD" --format plain < "cypher/label_concepts_by_fsn.cypher" > /dev/null 2>&1; then
     echo "  ✓ Success (or no ObjectConcept nodes found)"
 else
     echo "  ⚠ Warning: Labeling step had issues (this is OK if you don't have SNOMED CT concepts)"
